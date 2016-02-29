@@ -32,28 +32,34 @@ $(function() {
 	//
 	// Injects itself into body
 
-	var pii = qs.pii || 0;
+	// var pii = qs.pii || 0;
+	var id = qs.id || 0;
+	var journal = qs.journal || '';
 
-	var document_json_url = "http://52.20.223.77:4932/xmlfigures/aging/pii/" + pii;
+	var s3xml = 'https://s3-us-west-1.amazonaws.com/paperchase-'+journal+'/xml/' + id + '.xml';
+	console.log('s3xml',s3xml);
+	// console.log('pii',pii);
 
-	var document_request = new XMLHttpRequest();
-	document_request.onload = function(e) {
+	// var document_json_url = "http://52.20.223.77:4932/xmlfigures/aging/pii/" + pii;
+
+	// var document_request = new XMLHttpRequest();
+	// document_request.onload = function(e) {
 		var document_url = "";
-		var document_json = JSON.parse(document_request.responseText);
-		document_json[0].figures = document_json[0].figures.filter(function(o){
-			return (o.figureText != "" || o.imgURLs.length > 0);
-		});
+		// var document_json = JSON.parse(document_request.responseText);
+		// document_json[0].figures = document_json[0].figures.filter(function(o){
+			// return (o.figureText != "" || o.imgURLs.length > 0);
+		// });
 
-		console.log(document_json[0]);
+		// console.log(document_json[0]);
 
-		if (document_json.length > 0) {
-			document_url = (document_json[0].full_xml_url !== void(0)) ? document_json[0].full_xml_url : document_json[0].abstract_xml_url;
-		}
+		// if (document_json.length > 0) {
+			// document_url = (document_json[0].full_xml_url !== void(0)) ? document_json[0].full_xml_url : document_json[0].abstract_xml_url;
+		// }
 
-		console.log(document_url);
+		// console.log(document_url);
 
 		var app = new window.Lens({
-			document_url: document_url
+			document_url: s3xml
 		});
 
 		var realrender = app.render.bind(app);
@@ -79,10 +85,11 @@ $(function() {
 		window.app = app;
 
 
-	};
+	// };
 
-	document_request.open("GET", document_json_url);
-	document_request.send();
+	// document_request.open("GET", document_json_url);
+	// document_request.open("GET", s3xml);
+	// document_request.send();
 
 });
 
