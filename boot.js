@@ -1,46 +1,19 @@
+var journalConfig = require('./config.js');
+var fxns = require('./fxns.js');
+
 window.Lens = require("./src/my-lens");
-
-// Little helper used to parse query strings from urls
-// --------
-//
-
-var qs = function () {
-	var query_string = {};
-	var query = window.location.search.substring(1);
-	var vars = query.split("&");
-	for (var i=0;i<vars.length;i++) {
-		var pair = vars[i].split("=");
-			// If first entry with this name
-		if (typeof query_string[pair[0]] === "undefined") {
-			query_string[pair[0]] = pair[1];
-			// If second entry with this name
-		} else if (typeof query_string[pair[0]] === "string") {
-			var arr = [ query_string[pair[0]], pair[1] ];
-			query_string[pair[0]] = arr;
-			// If third or later entry with this name
-		} else {
-			query_string[pair[0]].push(pair[1]);
-		}
-	}
-	return query_string;
-} ();
 
 $(function() {
 
 	// Create a new Lens app instance
 	// --------
-	//
-	// Injects itself into body
 
-	// var pii = qs.pii || 0;
-	var id = qs.id || 0;
-	var journal = qs.journal || '';
-
-	var s3xml = 'https://s3-us-west-1.amazonaws.com/paperchase-'+journal+'/xml/' + id + '.xml';
-	console.log('s3xml',s3xml);
-	// console.log('pii',pii);
-
-	// var document_json_url = "http://52.20.223.77:4932/xmlfigures/aging/pii/" + pii;
+	var queryParams = fxns.qs();
+	var mongoId = queryParams.id || 0;
+	// console.log('id',mongoId);
+	// var s3xml = journalConfig.url.xml + mongoId + '.xml';
+	var s3xml = 'temp/7DApgLsM5Hoqt5iDk.xml';
+	// console.log('s3xml',s3xml);
 
 	// var document_request = new XMLHttpRequest();
 	// document_request.onload = function(e) {
