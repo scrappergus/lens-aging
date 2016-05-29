@@ -10,14 +10,15 @@ $(function() {
 
 	var queryParams = fxns.qs();
 	var mongoId = queryParams.id || 0;
+
 	// console.log('id',mongoId);
-	// var s3xml = journalConfig.url.xml + mongoId + '.xml';
-	var s3xml = 'temp/7DApgLsM5Hoqt5iDk.xml';
+	 var s3xml = journalConfig.url.paperchase+"lens-xml/aging/"+ mongoId + ".xml";
+	// var s3xml = 'temp/7DApgLsM5Hoqt5iDk.xml';
 	// console.log('s3xml',s3xml);
 
 	// var document_request = new XMLHttpRequest();
-	// document_request.onload = function(e) {
-		var document_url = "";
+//	 document_request.onload = function(e) {
+//		var document_url = "";
 		// var document_json = JSON.parse(document_request.responseText);
 		// document_json[0].figures = document_json[0].figures.filter(function(o){
 			// return (o.figureText != "" || o.imgURLs.length > 0);
